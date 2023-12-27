@@ -4,11 +4,6 @@ module "database_dynamodb" {
 
 module "api_gateway" {
   source = "./modules/api_gateway"
-
-  wallet = {
-    function_name = module.lambda_wallet.lambda_function_name
-    invoke_arn    = module.lambda_wallet.lambda_invoke_arn
-  }
 }
 
 module "lambda_wallet" {

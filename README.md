@@ -1,6 +1,6 @@
-# Terraform Wallet Backend
+# Terraform Caterpillar
 
-Script Terraform do aplicativo Wallet Backend
+Script Terraform para recursos de projetos produção
 
 ## Introdução
 
@@ -26,8 +26,8 @@ Quaisquer alterações realizadas no projeto deve ser analisadas antes de sua pu
 ```bash
 #!/bin/bash
 
-# compara estrutura local com o publicado
-terraform plan
+# definição de componentes realizadas por módulos
+terraform plan --target module.api_gateway
 ```
 
 Após a validação das modificações, deve-se disparar a sua sincronização com o ambiente de produção
@@ -35,7 +35,7 @@ Após a validação das modificações, deve-se disparar a sua sincronização c
 ```bash
 #!/bin/bash
 
-terraform apply
+terraform apply --target module.api_gateway
 ```
 
 ### Rollback
@@ -45,7 +45,7 @@ terraform apply
 ```bash
 #!/bin/bash
 
-terraform destroy
+terraform destroy --target module.api_gateway
 ```
 
 ### Contribuições
