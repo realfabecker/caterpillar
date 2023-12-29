@@ -53,7 +53,7 @@ resource "aws_iam_policy" "lambda_logging" {
             "s3:DeleteObject",
           ]
           Effect   = "Allow"
-          Resource = "arn:aws:s3:::${var.s3_bucket_name}"
+          Resource = "arn:aws:s3:::${var.s3_bucket_name}/*"
           Sid      = "S3"
         },
         {
