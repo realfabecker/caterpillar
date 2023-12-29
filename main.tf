@@ -75,3 +75,32 @@ module "photos_proxy" {
   rest_api_id            = module.api_gateway.rest_api_id
   rest_root_id           = module.api_gateway.root_resource_id
 }
+
+module "lambda_auth3" {
+  source = "./modules/lambda_auth3"
+
+  function_name = "auth3"
+  entrypoint    = "bootstrap"
+
+  zip_source_file = "../backend/out/bootstrap"
+  zip_output_path = "../backend/out"
+  zip_file_name   = "lambda_backend_handler.zip"
+
+  environment = {
+    APP_NAME          = "auth3"
+    COGNITO_CLIENT_ID = var.COGNITO_CLIENT_ID
+  }
+}
+
+module "auth3_proxy" {
+  source = "./modules/api_lambda"
+
+  path_part = "auth3"
+
+  lambda_function_name = module.lambda_auth3.lambda_function_name
+  lambda_invoke_arn    = module.lambda_auth3.lambda_invoke_arn
+
+  rest_api_execution_arn = module.api_gateway.rest_api_execution_arn
+  rest_api_id            = module.api_gateway.rest_api_id
+  rest_root_id           = module.api_gateway.root_resource_id
+}

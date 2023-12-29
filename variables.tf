@@ -3,17 +3,16 @@ variable "COGNITO_CLIENT_ID" {
 }
 
 variable "COGNITO_JWK_URL" {
-  type = string
-}
-
-variable "APP_NAME" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "DYNAMODB_TABLE_NAME" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "S3_BUCKET_NAME" {
-  type = string
+  type    = string
+  default = ""
 }
