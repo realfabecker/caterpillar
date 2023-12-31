@@ -1,5 +1,6 @@
 variable "COGNITO_CLIENT_ID" {
   type = string
+  default = ""
 }
 
 variable "COGNITO_JWK_URL" {

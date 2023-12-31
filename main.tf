@@ -104,3 +104,35 @@ module "auth3_proxy" {
   rest_api_id            = module.api_gateway.rest_api_id
   rest_root_id           = module.api_gateway.root_resource_id
 }
+
+module "lambda_buck3t" {
+  source = "./modules/lambda_buck3t"
+
+  function_name = "buck3t"
+  entrypoint    = "bootstrap"
+
+  zip_source_file = "../backend/out/bootstrap"
+  zip_output_path = "../backend/out"
+  zip_file_name   = "lambda_backend_handler.zip"
+
+  s3_bucket_name = var.S3_BUCKET_NAME
+
+  environment = {
+    APP_NAME        = "buck3t"
+    COGNITO_JWK_URL = var.COGNITO_JWK_URL
+    BUCKET_NAME     = var.S3_BUCKET_NAME
+  }
+}
+
+module "buck3t_proxy" {
+  source = "./modules/api_lambda"
+
+  path_part = "buck3t"
+
+  lambda_function_name = module.lambda_buck3t.lambda_function_name
+  lambda_invoke_arn    = module.lambda_buck3t.lambda_invoke_arn
+
+  rest_api_execution_arn = module.api_gateway.rest_api_execution_arn
+  rest_api_id            = module.api_gateway.rest_api_id
+  rest_root_id           = module.api_gateway.root_resource_id
+}
