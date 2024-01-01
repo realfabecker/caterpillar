@@ -136,3 +136,18 @@ module "buck3t_proxy" {
   rest_api_id            = module.api_gateway.rest_api_id
   rest_root_id           = module.api_gateway.root_resource_id
 }
+
+module "lambda_auth4" {
+  source = "./modules/lambda_auth4"
+
+  function_name = "auth4"
+  entrypoint    = "bootstrap"
+
+  zip_source_file = "../backend/out/bootstrap"
+  zip_output_path = "../backend/out"
+  zip_file_name   = "lambda_backend_handler.zip"
+
+  environment = {
+    COGNITO_JWK_URL = var.COGNITO_JWK_URL
+  }
+}
