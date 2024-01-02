@@ -13,12 +13,7 @@ resource "aws_lambda_function" "lambda" {
   role    = aws_iam_role.iam_for_lambda.arn
 
   environment {
-    variables = {
-      "APP_NAME"            = var.APP_NAME
-      "COGNITO_CLIENT_ID"   = var.COGNITO_CLIENT_ID
-      "COGNITO_JWK_URL"     = var.COGNITO_JWK_URL
-      "DYNAMODB_TABLE_NAME" = var.DYNAMODB_TABLE_NAME
-    }
+    variables = var.environment
   }
 }
 

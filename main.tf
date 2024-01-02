@@ -12,16 +12,17 @@ module "lambda_wallet" {
   function_name = "wallet"
   entrypoint    = "bootstrap"
 
-  zip_source_file = "../backend/out/bootstrap"
-  zip_output_path = "../backend/out/"
+  zip_source_file = "./projects/wallet/backend/out/bootstrap"
+  zip_output_path = "./projects/wallet/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
   dynamodb_table_arn = module.database_dynamodb.dynamodb_table_arn
+  APP_NAME           = "wallet"
 
-  APP_NAME            = "wallet"
-  COGNITO_JWK_URL     = var.COGNITO_JWK_URL
-  COGNITO_CLIENT_ID   = var.COGNITO_CLIENT_ID
-  DYNAMODB_TABLE_NAME = var.DYNAMODB_TABLE_NAME
+  environment = {
+    APP_NAME            = "wallet"
+    DYNAMODB_TABLE_NAME = var.DYNAMODB_TABLE_NAME
+  }
 }
 
 module "wallet_proxy" {
@@ -43,8 +44,8 @@ module "lambda_photos" {
   function_name = "photos"
   entrypoint    = "bootstrap"
 
-  zip_source_file = "../backend/out/bootstrap"
-  zip_output_path = "../backend/out"
+  zip_source_file = "./projects/photos/backend/out/bootstrap"
+  zip_output_path = "./projects/photos/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
   dynamodb_table_arn = module.database_dynamodb.dynamodb_table_arn
@@ -78,8 +79,8 @@ module "lambda_auth3" {
   function_name = "auth3"
   entrypoint    = "bootstrap"
 
-  zip_source_file = "../backend/out/bootstrap"
-  zip_output_path = "../backend/out"
+  zip_source_file = "./projects/auth3/backend/out/bootstrap"
+  zip_output_path = "./projects/auth3/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
   environment = {
@@ -107,8 +108,8 @@ module "lambda_buck3t" {
   function_name = "buck3t"
   entrypoint    = "bootstrap"
 
-  zip_source_file = "../backend/out/bootstrap"
-  zip_output_path = "../backend/out"
+  zip_source_file = "./projects/buck3t/backend/out/bootstrap"
+  zip_output_path = "./projects/buck3t/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
   s3_bucket_name = var.S3_BUCKET_NAME
@@ -137,8 +138,8 @@ module "lambda_auth4" {
   function_name = "auth4"
   entrypoint    = "bootstrap"
 
-  zip_source_file = "../backend/out/bootstrap"
-  zip_output_path = "../backend/out"
+  zip_source_file = "./projects/auth3/backend/out/bootstrap"
+  zip_output_path = "./projects/auth3/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
   environment = {
