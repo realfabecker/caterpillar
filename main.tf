@@ -118,8 +118,6 @@ module "lambda_buck3t" {
   s3_bucket_name = var.S3_BUCKET_NAME
 
   environment = {
-    APP_NAME        = "buck3t"
-    COGNITO_JWK_URL = var.COGNITO_JWK_URL
     BUCKET_NAME     = var.S3_BUCKET_NAME
   }
 }
