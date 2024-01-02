@@ -53,11 +53,7 @@ module "lambda_photos" {
   function_url = false
 
   environment = {
-    APP_NAME = "photos"
-
-    COGNITO_JWK_URL   = var.COGNITO_JWK_URL
-    COGNITO_CLIENT_ID = var.COGNITO_CLIENT_ID
-
+    APP_NAME            = "photos"
     DYNAMODB_TABLE_NAME = var.DYNAMODB_TABLE_NAME
     BUCKET_NAME         = var.S3_BUCKET_NAME
   }
@@ -118,7 +114,7 @@ module "lambda_buck3t" {
   s3_bucket_name = var.S3_BUCKET_NAME
 
   environment = {
-    BUCKET_NAME     = var.S3_BUCKET_NAME
+    BUCKET_NAME = var.S3_BUCKET_NAME
   }
 }
 
