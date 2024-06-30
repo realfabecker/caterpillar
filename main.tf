@@ -6,38 +6,6 @@ module "api_gateway" {
   source = "./modules/api_gateway"
 }
 
-module "lambda_wallet" {
-  source = "./modules/lambda_wallet"
-
-  function_name = "wallet"
-  entrypoint    = "bootstrap"
-
-  zip_source_file = "./projects/wallet/backend/out/bootstrap"
-  zip_output_path = "./projects/wallet/backend/out"
-  zip_file_name   = "lambda_backend_handler.zip"
-
-  dynamodb_table_arn = module.database_dynamodb.dynamodb_table_arn
-  APP_NAME           = "wallet"
-
-  environment = {
-    APP_NAME            = "wallet"
-    DYNAMODB_TABLE_NAME = var.DYNAMODB_TABLE_NAME
-  }
-}
-
-module "wallet_proxy" {
-  source = "./modules/api_lambda"
-
-  path_part = "wallet"
-
-  lambda_function_name = module.lambda_wallet.lambda_function_name
-  lambda_invoke_arn    = module.lambda_wallet.lambda_invoke_arn
-
-  rest_api_execution_arn = module.api_gateway.rest_api_execution_arn
-  rest_api_id            = module.api_gateway.rest_api_id
-  rest_root_id           = module.api_gateway.root_resource_id
-}
-
 module "lambda_photos" {
   source = "./modules/lambda_photos"
 
@@ -49,14 +17,14 @@ module "lambda_photos" {
   zip_file_name   = "lambda_backend_handler.zip"
 
   dynamodb_table_arn = module.database_dynamodb.dynamodb_table_arn
-  s3_bucket_name     = var.S3_BUCKET_NAME
+  s3_bucket_name     = "sintese"
 
   function_url = false
 
   environment = {
     APP_NAME            = "photos"
-    DYNAMODB_TABLE_NAME = var.DYNAMODB_TABLE_NAME
-    BUCKET_NAME         = var.S3_BUCKET_NAME
+    DYNAMODB_TABLE_NAME = "sintese"
+    BUCKET_NAME         = "sintese"
   }
 }
 
@@ -85,7 +53,7 @@ module "lambda_auth3" {
 
   environment = {
     APP_NAME          = "auth3"
-    COGNITO_CLIENT_ID = var.COGNITO_CLIENT_ID
+    COGNITO_CLIENT_ID = "7n3n1umhe20ncdm3qco1qc19s3"
   }
 }
 
@@ -112,10 +80,10 @@ module "lambda_buck3t" {
   zip_output_path = "./projects/buck3t/backend/out"
   zip_file_name   = "lambda_backend_handler.zip"
 
-  s3_bucket_name = var.S3_BUCKET_NAME
+  s3_bucket_name = "sintese"
 
   environment = {
-    BUCKET_NAME = var.S3_BUCKET_NAME
+    BUCKET_NAME = "sintese"
   }
 }
 
@@ -143,6 +111,6 @@ module "lambda_auth4" {
   zip_file_name   = "lambda_backend_handler.zip"
 
   environment = {
-    COGNITO_JWK_URL = var.COGNITO_JWK_URL
+    COGNITO_JWK_URL = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_63mYbjp1e/.well-known/jwks.json"
   }
 }

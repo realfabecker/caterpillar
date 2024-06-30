@@ -34,3 +34,7 @@ variable "function_url" {
 variable "environment" {
   type    = map(string)
 }
+
+variable "archive_version" {
+  type = string
+}
